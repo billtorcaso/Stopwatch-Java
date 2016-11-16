@@ -1,0 +1,357 @@
+
+Hello, world --- from StopwatchFactory.java
+
+Nanoseconds displayed as %012d should be read as follows:
+
+	012987654321
+
+	12 seconds	987 milliseconds	654 microseconds	321 nanoseconds
+
+Expect: a few 10-second delays during timing ops,
+and then output from various Stopwatch methods.
+
+Now testing the pretty-print services.
+
+Expect: deeply indented Task Begin/End titles from prettyPrint()
+
+Here is prettyPrint(taskRelative):
+Expect 'TaskBegin' to report 0 and 'TaskEnd'
+to report elapsed time since its matching task began.
+The final time is elapsed-time for the whole stopwatch
+----------
+
+000000000000	Creation:Linnaean Classification
+000000000000	| TaskBegin:Kingdom: Animalia 
+000000000000	| | TaskBegin:Phylum: Chordata
+000000000000	| | | TaskBegin:Subphylum: Vertebrata
+000000000000	| | | | TaskBegin:Class: Mammalia
+000000000000	| | | | | TaskBegin:Subclass: Theria
+000000000000	| | | | | | TaskBegin:Infraclass: Eutheria
+000000000000	| | | | | | | TaskBegin:Order: Primates
+000000000000	| | | | | | | | TaskBegin:Suborder: Anthropoidea
+000000000000	| | | | | | | | | TaskBegin:Superfamily: Hominoidea
+000000000000	| | | | | | | | | | TaskBegin:Family: Hominidae
+000000000000	| | | | | | | | | | | TaskBegin:Genus: Homo
+000000000000	| | | | | | | | | | | | TaskBegin:Species: Sapiens
+000000000000	| | | | | | | | | | | | | TaskBegin:People At Knome
+000000000000	| | | | | | | | | | | | | | Me - Bill Torcaso
+000000011000	| | | | | | | | | | | | | TaskEnd:People At Knome
+000000024000	| | | | | | | | | | | | TaskEnd:Species
+000000037000	| | | | | | | | | | | TaskEnd:Genus
+000000000000	| | | | | | | | | | | Notice a different style of Begin-Moment-End below here.
+000000000000	| | | | | | | | | | | TaskBegin:Genus
+000000000000	| | | | | | | | | | | | Pan (all chimpanzees)
+000000000000	| | | | | | | | | | | | TaskBegin:Species
+000000000000	| | | | | | | | | | | | | Troglodytes
+000000000000	| | | | | | | | | | | | | TaskBegin:Movie Stars
+000000000000	| | | | | | | | | | | | | | Cheetah - Tarzan's companion
+000000011000	| | | | | | | | | | | | | TaskEnd:Movie Stars
+000000000000	| | | | | | | | | | | | | TaskBegin:Subspecies
+000000000000	| | | | | | | | | | | | | | schweinfurthi
+000000000000	| | | | | | | | | | | | | | TaskBegin:Alpha Male
+000000000000	| | | | | | | | | | | | | | | Frodo - Jane Goodall's companion
+000000010000	| | | | | | | | | | | | | | TaskEnd:Alpha Male
+000000022000	| | | | | | | | | | | | | TaskEnd:Subspecies
+000000054000	| | | | | | | | | | | | TaskEnd:Species
+000000068000	| | | | | | | | | | | TaskEnd:Genus
+000000127000	| | | | | | | | | | TaskEnd:Family
+000000164000	| | | | | | | | | TaskEnd:Superfamily
+000000173000	| | | | | | | | TaskEnd:Suborder
+000000183000	| | | | | | | TaskEnd:Order
+000000200000	| | | | | | TaskEnd:Infraclass
+000000212000	| | | | | TaskEnd:Subclass
+000000221000	| | | | TaskEnd:Class
+000000234000	| | | TaskEnd:Subphylum
+000000246000	| | TaskEnd:Phylum
+000000259000	| TaskEnd:Kingdom
+000000299000	TaskEnd:The-End
+
+
+Here is prettyPrint(previousMomentRelative).
+Expect each timestamp to be a small number of microseconds after the one before it.
+
+000000000000	Creation:Linnaean Classification
+000000036000	| TaskBegin:Kingdom: Animalia 
+000000009000	| | TaskBegin:Phylum: Chordata
+000000006000	| | | TaskBegin:Subphylum: Vertebrata
+000000005000	| | | | TaskBegin:Class: Mammalia
+000000004000	| | | | | TaskBegin:Subclass: Theria
+000000005000	| | | | | | TaskBegin:Infraclass: Eutheria
+000000007000	| | | | | | | TaskBegin:Order: Primates
+000000006000	| | | | | | | | TaskBegin:Suborder: Anthropoidea
+000000005000	| | | | | | | | | TaskBegin:Superfamily: Hominoidea
+000000033000	| | | | | | | | | | TaskBegin:Family: Hominidae
+000000005000	| | | | | | | | | | | TaskBegin:Genus: Homo
+000000009000	| | | | | | | | | | | | TaskBegin:Species: Sapiens
+000000005000	| | | | | | | | | | | | | TaskBegin:People At Knome
+000000003000	| | | | | | | | | | | | | | Me - Bill Torcaso
+000000008000	| | | | | | | | | | | | | TaskEnd:People At Knome
+000000008000	| | | | | | | | | | | | TaskEnd:Species
+000000004000	| | | | | | | | | | | TaskEnd:Genus
+000000005000	| | | | | | | | | | | Notice a different style of Begin-Moment-End below here.
+000000003000	| | | | | | | | | | | TaskBegin:Genus
+000000004000	| | | | | | | | | | | | Pan (all chimpanzees)
+000000004000	| | | | | | | | | | | | TaskBegin:Species
+000000007000	| | | | | | | | | | | | | Troglodytes
+000000006000	| | | | | | | | | | | | | TaskBegin:Movie Stars
+000000007000	| | | | | | | | | | | | | | Cheetah - Tarzan's companion
+000000004000	| | | | | | | | | | | | | TaskEnd:Movie Stars
+000000004000	| | | | | | | | | | | | | TaskBegin:Subspecies
+000000003000	| | | | | | | | | | | | | | schweinfurthi
+000000005000	| | | | | | | | | | | | | | TaskBegin:Alpha Male
+000000003000	| | | | | | | | | | | | | | | Frodo - Jane Goodall's companion
+000000007000	| | | | | | | | | | | | | | TaskEnd:Alpha Male
+000000004000	| | | | | | | | | | | | | TaskEnd:Subspecies
+000000004000	| | | | | | | | | | | | TaskEnd:Species
+000000006000	| | | | | | | | | | | TaskEnd:Genus
+000000009000	| | | | | | | | | | TaskEnd:Family
+000000004000	| | | | | | | | | TaskEnd:Superfamily
+000000004000	| | | | | | | | TaskEnd:Suborder
+000000004000	| | | | | | | TaskEnd:Order
+000000010000	| | | | | | TaskEnd:Infraclass
+000000007000	| | | | | TaskEnd:Subclass
+000000005000	| | | | TaskEnd:Class
+000000008000	| | | TaskEnd:Subphylum
+000000006000	| | TaskEnd:Phylum
+000000004000	| TaskEnd:Kingdom
+000000004000	TaskEnd:The-End
+
+
+Here is prettyPrint(creationMomentRelative):
+Expect each timestamp to increase from the beginning.
+The difference of two timestamps is the elapsed time between them
+
+000000000000	Creation:Linnaean Classification
+000000036000	| TaskBegin:Kingdom: Animalia 
+000000045000	| | TaskBegin:Phylum: Chordata
+000000051000	| | | TaskBegin:Subphylum: Vertebrata
+000000056000	| | | | TaskBegin:Class: Mammalia
+000000060000	| | | | | TaskBegin:Subclass: Theria
+000000065000	| | | | | | TaskBegin:Infraclass: Eutheria
+000000072000	| | | | | | | TaskBegin:Order: Primates
+000000078000	| | | | | | | | TaskBegin:Suborder: Anthropoidea
+000000083000	| | | | | | | | | TaskBegin:Superfamily: Hominoidea
+000000116000	| | | | | | | | | | TaskBegin:Family: Hominidae
+000000121000	| | | | | | | | | | | TaskBegin:Genus: Homo
+000000130000	| | | | | | | | | | | | TaskBegin:Species: Sapiens
+000000135000	| | | | | | | | | | | | | TaskBegin:People At Knome
+000000138000	| | | | | | | | | | | | | | Me - Bill Torcaso
+000000146000	| | | | | | | | | | | | | TaskEnd:People At Knome
+000000154000	| | | | | | | | | | | | TaskEnd:Species
+000000158000	| | | | | | | | | | | TaskEnd:Genus
+000000163000	| | | | | | | | | | | Notice a different style of Begin-Moment-End below here.
+000000166000	| | | | | | | | | | | TaskBegin:Genus
+000000170000	| | | | | | | | | | | | Pan (all chimpanzees)
+000000174000	| | | | | | | | | | | | TaskBegin:Species
+000000181000	| | | | | | | | | | | | | Troglodytes
+000000187000	| | | | | | | | | | | | | TaskBegin:Movie Stars
+000000194000	| | | | | | | | | | | | | | Cheetah - Tarzan's companion
+000000198000	| | | | | | | | | | | | | TaskEnd:Movie Stars
+000000202000	| | | | | | | | | | | | | TaskBegin:Subspecies
+000000205000	| | | | | | | | | | | | | | schweinfurthi
+000000210000	| | | | | | | | | | | | | | TaskBegin:Alpha Male
+000000213000	| | | | | | | | | | | | | | | Frodo - Jane Goodall's companion
+000000220000	| | | | | | | | | | | | | | TaskEnd:Alpha Male
+000000224000	| | | | | | | | | | | | | TaskEnd:Subspecies
+000000228000	| | | | | | | | | | | | TaskEnd:Species
+000000234000	| | | | | | | | | | | TaskEnd:Genus
+000000243000	| | | | | | | | | | TaskEnd:Family
+000000247000	| | | | | | | | | TaskEnd:Superfamily
+000000251000	| | | | | | | | TaskEnd:Suborder
+000000255000	| | | | | | | TaskEnd:Order
+000000265000	| | | | | | TaskEnd:Infraclass
+000000272000	| | | | | TaskEnd:Subclass
+000000277000	| | | | TaskEnd:Class
+000000285000	| | | TaskEnd:Subphylum
+000000291000	| | TaskEnd:Phylum
+000000295000	| TaskEnd:Kingdom
+000000299000	TaskEnd:The-End
+
+
+Here is prettyPrint(nanoTimeValue):
+Expect full nanosecond counts (ugly) that always increase.
+1426260751990670000	Creation:Linnaean Classification
+1426260751990706000	| TaskBegin:Kingdom: Animalia 
+1426260751990715000	| | TaskBegin:Phylum: Chordata
+1426260751990721000	| | | TaskBegin:Subphylum: Vertebrata
+1426260751990726000	| | | | TaskBegin:Class: Mammalia
+1426260751990730000	| | | | | TaskBegin:Subclass: Theria
+1426260751990735000	| | | | | | TaskBegin:Infraclass: Eutheria
+1426260751990742000	| | | | | | | TaskBegin:Order: Primates
+1426260751990748000	| | | | | | | | TaskBegin:Suborder: Anthropoidea
+1426260751990753000	| | | | | | | | | TaskBegin:Superfamily: Hominoidea
+1426260751990786000	| | | | | | | | | | TaskBegin:Family: Hominidae
+1426260751990791000	| | | | | | | | | | | TaskBegin:Genus: Homo
+1426260751990800000	| | | | | | | | | | | | TaskBegin:Species: Sapiens
+1426260751990805000	| | | | | | | | | | | | | TaskBegin:People At Knome
+1426260751990808000	| | | | | | | | | | | | | | Me - Bill Torcaso
+1426260751990816000	| | | | | | | | | | | | | TaskEnd:People At Knome
+1426260751990824000	| | | | | | | | | | | | TaskEnd:Species
+1426260751990828000	| | | | | | | | | | | TaskEnd:Genus
+1426260751990833000	| | | | | | | | | | | Notice a different style of Begin-Moment-End below here.
+1426260751990836000	| | | | | | | | | | | TaskBegin:Genus
+1426260751990840000	| | | | | | | | | | | | Pan (all chimpanzees)
+1426260751990844000	| | | | | | | | | | | | TaskBegin:Species
+1426260751990851000	| | | | | | | | | | | | | Troglodytes
+1426260751990857000	| | | | | | | | | | | | | TaskBegin:Movie Stars
+1426260751990864000	| | | | | | | | | | | | | | Cheetah - Tarzan's companion
+1426260751990868000	| | | | | | | | | | | | | TaskEnd:Movie Stars
+1426260751990872000	| | | | | | | | | | | | | TaskBegin:Subspecies
+1426260751990875000	| | | | | | | | | | | | | | schweinfurthi
+1426260751990880000	| | | | | | | | | | | | | | TaskBegin:Alpha Male
+1426260751990883000	| | | | | | | | | | | | | | | Frodo - Jane Goodall's companion
+1426260751990890000	| | | | | | | | | | | | | | TaskEnd:Alpha Male
+1426260751990894000	| | | | | | | | | | | | | TaskEnd:Subspecies
+1426260751990898000	| | | | | | | | | | | | TaskEnd:Species
+1426260751990904000	| | | | | | | | | | | TaskEnd:Genus
+1426260751990913000	| | | | | | | | | | TaskEnd:Family
+1426260751990917000	| | | | | | | | | TaskEnd:Superfamily
+1426260751990921000	| | | | | | | | TaskEnd:Suborder
+1426260751990925000	| | | | | | | TaskEnd:Order
+1426260751990935000	| | | | | | TaskEnd:Infraclass
+1426260751990942000	| | | | | TaskEnd:Subclass
+1426260751990947000	| | | | TaskEnd:Class
+1426260751990955000	| | | TaskEnd:Subphylum
+1426260751990961000	| | TaskEnd:Phylum
+1426260751990965000	| TaskEnd:Kingdom
+1426260751990969000	TaskEnd:The-End
+
+
+Here is the plain toString() of the Linnaean stopwatch
+000000000000	Creation:Linnaean Classification
+000000036000	TaskBegin:Kingdom: Animalia 
+000000009000	TaskBegin:Phylum: Chordata
+000000006000	TaskBegin:Subphylum: Vertebrata
+000000005000	TaskBegin:Class: Mammalia
+000000004000	TaskBegin:Subclass: Theria
+000000005000	TaskBegin:Infraclass: Eutheria
+000000007000	TaskBegin:Order: Primates
+000000006000	TaskBegin:Suborder: Anthropoidea
+000000005000	TaskBegin:Superfamily: Hominoidea
+000000033000	TaskBegin:Family: Hominidae
+000000005000	TaskBegin:Genus: Homo
+000000009000	TaskBegin:Species: Sapiens
+000000005000	TaskBegin:People At Knome
+000000003000	Me - Bill Torcaso
+000000008000	TaskEnd:People At Knome
+000000008000	TaskEnd:Species
+000000004000	TaskEnd:Genus
+000000005000	Notice a different style of Begin-Moment-End below here.
+000000003000	TaskBegin:Genus
+000000004000	Pan (all chimpanzees)
+000000004000	TaskBegin:Species
+000000007000	Troglodytes
+000000006000	TaskBegin:Movie Stars
+000000007000	Cheetah - Tarzan's companion
+000000004000	TaskEnd:Movie Stars
+000000004000	TaskBegin:Subspecies
+000000003000	schweinfurthi
+000000005000	TaskBegin:Alpha Male
+000000003000	Frodo - Jane Goodall's companion
+000000007000	TaskEnd:Alpha Male
+000000004000	TaskEnd:Subspecies
+000000004000	TaskEnd:Species
+000000006000	TaskEnd:Genus
+000000009000	TaskEnd:Family
+000000004000	TaskEnd:Superfamily
+000000004000	TaskEnd:Suborder
+000000004000	TaskEnd:Order
+000000010000	TaskEnd:Infraclass
+000000007000	TaskEnd:Subclass
+000000005000	TaskEnd:Class
+000000008000	TaskEnd:Subphylum
+000000006000	TaskEnd:Phylum
+000000004000	TaskEnd:Kingdom
+000000004000	TaskEnd:The-End
+
+Now testing the shared Stopwatch services ....
+
+Expect: two different objects to call printyPrint(), and have identical results
+
+Here are two shared Stopwatch references output from prettyPrint():
+Are they identical?
+
+ticker2:
+----------
+000000000000	Creation:Shared
+000000009000	| TaskBegin:SharedStopwatch:testing begins
+000000014000	| | TaskBegin:SharedStopwatch:1:starting a task
+000000017000	| | | SharedStopwatch:testing a moment
+000000020000	| | | SharedStopwatch:testing another moment
+000000027000	| | TaskEnd:SharedStopwatch:1:task ends
+000000036000	| TaskEnd:SharedStopwatch:testing ends
+
+ticker3:
+----------
+000000000000	Creation:Shared
+000000009000	| TaskBegin:SharedStopwatch:testing begins
+000000014000	| | TaskBegin:SharedStopwatch:1:starting a task
+000000017000	| | | SharedStopwatch:testing a moment
+000000020000	| | | SharedStopwatch:testing another moment
+000000027000	| | TaskEnd:SharedStopwatch:1:task ends
+000000036000	| TaskEnd:SharedStopwatch:testing ends
+
+
+Testing StopwatchInstance.release() using assertions.  No Exception means success.
+No Exception - that means success.
+End of tests for shared stopwatch
+
+Simple comparison of creationMomentRelative and previousMomentRelative
+
+Here is prettyPrint():
+Note that the seconds go 0,0,1,3,6,10,10
+----------
+000000000000	Creation:Greek letters
+000000005000	| TaskBegin:alpha
+001005757000	| | TaskBegin:beta
+003007659000	| | | gamma
+006008376000	| | TaskEnd:delta
+010008717000	| TaskEnd:epsilon
+010008742000	TaskEnd:Greek letters
+
+
+Here is toString():
+Note that the seconds go 0,0,1,2,3,4,0
+----------
+000000000000	Creation:Greek letters
+000000005000	TaskBegin:alpha
+001005752000	TaskBegin:beta
+002001902000	gamma
+003000717000	TaskEnd:delta
+004000341000	TaskEnd:epsilon
+000000025000	TaskEnd:Greek letters
+
+
+Here is momentsRetrieve(taskRelative).toString():
+----------
+[000000000000	Creation:Greek letters, 000000000000	TaskBegin:alpha, 000000000000	TaskBegin:beta, 000000000000	gamma, 005002619000	TaskEnd:delta, 010008712000	TaskEnd:epsilon, 010008742000	TaskEnd:Greek letters]
+
+Here is momentsRetrieve(creationMomentRelative).toString():
+Expect seconds as 0,0,1,3,6,10,10
+----------
+[000000000000	Creation:Greek letters, 000000005000	TaskBegin:alpha, 001005757000	TaskBegin:beta, 003007659000	gamma, 006008376000	TaskEnd:delta, 010008717000	TaskEnd:epsilon, 010008742000	TaskEnd:Greek letters]
+
+Here is momentsRetrieve(previousMomentRelative).toString():
+Expect seconds as 0,0,1,2,3,4,0
+----------
+[000000000000	Creation:Greek letters, 000000005000	TaskBegin:alpha, 001005752000	TaskBegin:beta, 002001902000	gamma, 003000717000	TaskEnd:delta, 004000341000	TaskEnd:epsilon, 000000025000	TaskEnd:Greek letters]
+
+Here is momentsRetrieve(nanoTimeValue).toString():
+Expect increasing 12+ digit numbers
+----------
+[1426260752021028000	Creation:Greek letters, 1426260752021033000	TaskBegin:alpha, 1426260753026785000	TaskBegin:beta, 1426260755028687000	gamma, 1426260758029404000	TaskEnd:delta, 1426260762029745000	TaskEnd:epsilon, 1426260762029770000	TaskEnd:Greek letters]
+
+Here is plain toString():
+Expect seconds as 0,0,1,2,3,0
+----------
+000000000000	Creation:Greek letters
+000000005000	TaskBegin:alpha
+001005752000	TaskBegin:beta
+002001902000	gamma
+003000717000	TaskEnd:delta
+004000341000	TaskEnd:epsilon
+000000025000	TaskEnd:Greek letters
+
+
+--------------------
+That's all, folks!
