@@ -1,6 +1,6 @@
-13-March-2015
+28-May-2018
 Bill Torcaso
-torcasobill@gmail.com
+bill@billtorcaso.org
 
 This Java code contains a thread-safe Stopwatch object that is useful 
 for performance testing.
